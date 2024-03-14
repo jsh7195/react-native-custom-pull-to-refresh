@@ -1,0 +1,26 @@
+{
+  "name": "react-native-custom-pull-to-refresh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsh7195/react-native-custom-pull-to-refresh.git"
+  },
+  "keywords": [
+    "pull-to-refresh"
+  ],
+  "author": "jsh7195",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jsh7195/react-native-custom-pull-to-refresh/issues"
+  },
+  "homepage": "https://github.com/jsh7195/react-native-custom-pull-to-refresh#readme",
+  "dependencies": {
+    "react-native-gesture-handler": "^2.15.0",
+    "react-native-reanimated": "^3.6.2"
+  }
+}
