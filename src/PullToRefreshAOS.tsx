@@ -28,7 +28,7 @@ const PullToRefreshAOS = props => {
     });
 
     return (
-        <PanGestureHandler onGestureEvent={gestureHandler} activeOffsetY={[THRESHOLD * -1, 5]} failOffsetY={[0,50000]} failOffsetX={[-50000, 50000]} ref={panRef} simultaneousHandlers={[panRef, scrollRef]}>
+        <PanGestureHandler enabled={enablePullToRefresh.value} onGestureEvent={gestureHandler} activeOffsetY={[THRESHOLD * -1, 5]} failOffsetY={[0,50000]} failOffsetX={[-50000, 50000]} ref={panRef} simultaneousHandlers={[panRef, scrollRef]}>
             <Animated.View style={{ flex: 1 }}>
                 <Animated.FlatList
                     ref={scrollRef}
@@ -57,8 +57,10 @@ const PullToRefreshAOS = props => {
                     style={{ flex: 1, zIndex: 2, top: 0 }}
                     contentContainerStyle={props.contentContainerStyle}
                     data={props.data}
+                    keyExtractor={props.keyExtractor}
                     renderItem={props.renderItem}
-                    ListHeaderComponent={<_ListHeaderComponent />}
+                    ListHeaderComponent={<_ListHeaderComponent />
+                }
                 />
             </Animated.View>
         </PanGestureHandler>

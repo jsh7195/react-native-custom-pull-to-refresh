@@ -66,6 +66,7 @@ const PullToRefreshIOS = props => {
                         contentContainerStyle={props.contentContainerStyle}
                         data={props.data}
                         renderItem={props.renderItem}
+                        keyExtractor={props.keyExtractor}
                         ListHeaderComponent={<_ListHeaderComponent />}
                     />
                 </GestureDetector>
