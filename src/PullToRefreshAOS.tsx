@@ -73,12 +73,11 @@ const PullToRefreshAOS = (props: IPullToRefreshChild) => {
           overScrollMode={'never'}
           bounces={false}
           showsVerticalScrollIndicator={false}
-          style={{flex: 1, zIndex: 2, top: 0}}
           contentContainerStyle={contentContainerStyle}
           data={data}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
-          ListHeaderComponent={ListHeaderComponent}
+          ListHeaderComponent={<ListHeaderComponent />}
         />
       </Animated.View>
     </PanGestureHandler>
