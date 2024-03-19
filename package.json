@@ -26,6 +26,12 @@
     "react-native-gesture-handler": "^2.15.0",
     "react-native-reanimated": "^3.6.2"
   },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/runtime": "^7.20.0",
+    "@react-native/babel-preset": "0.73.21"
+  },
   "overrides": {
     "react-native-reanimated": "$react-native-reanimated"
   }
