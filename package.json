@@ -25,5 +25,8 @@
   "dependencies": {
     "react-native-gesture-handler": "^2.15.0",
     "react-native-reanimated": "^3.6.2"
+  },
+  "overrides": {
+    "react-native-reanimated": "$react-native-reanimated"
   }
 }
