@@ -11,7 +11,9 @@
     "url": "git+https://github.com/jsh7195/react-native-custom-pull-to-refresh.git"
   },
   "keywords": [
-    "pull-to-refresh"
+    "pull-to-refresh",
+    "pull to refresh",
+    "당겨서 새로고침"
   ],
   "author": "jsh7195",
   "license": "MIT",

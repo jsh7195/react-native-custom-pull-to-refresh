@@ -1,5 +1,6 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {forwardRef, useCallback, useImperativeHandle} from 'react';
-import {FlatList, FlatListProps, Platform} from 'react-native';
+import {Platform} from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -11,30 +12,23 @@ import Animated, {
 
 import PullToRefreshAOS from './PullToRefreshAOS';
 import PullToRefreshIOS from './PullToRefreshIOS';
-
-interface IPullToRefreshComponentProps
-  extends Omit<
-    FlatListProps<any>,
-    'data' | 'renderItem' | 'ListHeaderComponent'
-  > {
-  onRefresh: () => void;
-  onScroll?: any;
-  data?: any[];
-  renderItem?: any;
-  ListHeaderComponent?: any;
-  refreshComponent?: any;
-  THRESHOLD: number;
-  refreshPosition?: 'top' | 'down';
-}
-interface IPullToRefreshFunction {
-  goTop: () => void;
-}
+import {
+  IPullToRefreshComponentProps,
+  IPullToRefreshFunction,
+} from './PullRefresh';
 
 const PullToRefreshFlatList = forwardRef<
   IPullToRefreshFunction,
   IPullToRefreshComponentProps
 >((props, ref) => {
-  const {THRESHOLD, refreshPosition = 'top'} = props;
+  const {
+    ListHeaderComponent,
+    RefreshComponent,
+    THRESHOLD = 130,
+    refreshPosition = 'top',
+    onRefresh,
+  } = props;
+
   const scrollY = useSharedValue(0);
   const enablePullToRefresh = useSharedValue(true);
 
@@ -58,8 +52,8 @@ const PullToRefreshFlatList = forwardRef<
   };
 
   const refreshApi = () => {
-    if (props.onRefresh) {
-      props.onRefresh();
+    if (onRefresh) {
+      onRefresh();
     }
   };
 
@@ -114,7 +108,9 @@ const PullToRefreshFlatList = forwardRef<
   const _ListHeaderComponent = useCallback(() => {
     return (
       <Animated.View>
-        {refreshPosition === 'down' && props?.ListHeaderComponent}
+        {refreshPosition === 'bottom' && ListHeaderComponent ? (
+          <ListHeaderComponent />
+        ) : null}
         <Animated.View
           style={[
             loadingWrapAnimatedStyle,
@@ -122,38 +118,49 @@ const PullToRefreshFlatList = forwardRef<
               overflow: 'hidden',
             },
           ]}>
-          <Animated.View style={[wrapAnimatedStyle]}>
-            {props.refreshComponent ? (
-              props.refreshComponent
+          <Animated.View style={wrapAnimatedStyle}>
+            {RefreshComponent ? (
+              // RefreshComponent 존재 시 직접 렌더링
+              <RefreshComponent />
             ) : (
+              // 기본 텍스트 렌더링
               <Animated.Text
-                style={[
-                  {
-                    color: 'black',
-                    paddingBottom: 15,
-                    fontSize: 12,
-                    fontWeight: '800',
-                    letterSpacing: -0.4,
-                  },
-                ]}>
-                Custom Components
+                style={{
+                  flex: 1,
+                  textAlign: 'center',
+                  color: 'yellow',
+                  backgroundColor: 'green',
+                  paddingBottom: 15,
+                  fontSize: 12,
+                  fontWeight: '800',
+                  letterSpacing: -0.4,
+                }}>
+                Sample Refresh Component
               </Animated.Text>
             )}
           </Animated.View>
         </Animated.View>
-        {refreshPosition === 'top' && props?.ListHeaderComponent}
+        {refreshPosition === 'top' && ListHeaderComponent ? (
+          <ListHeaderComponent />
+        ) : null}
       </Animated.View>
     );
-  }, [props.ListHeaderComponent]);
+  }, [
+    RefreshComponent,
+    refreshPosition,
+    ListHeaderComponent,
+    loadingWrapAnimatedStyle,
+    wrapAnimatedStyle,
+  ]);
 
   const _config = {
+    ...props,
     scrollY,
     THRESHOLD,
-    _ListHeaderComponent,
     handleRefreshCompleteRefrshApi,
     handleRefreshComplete,
     enablePullToRefresh,
-    ...props,
+    ListHeaderComponent: _ListHeaderComponent,
   };
 
   const goTop = () => {
