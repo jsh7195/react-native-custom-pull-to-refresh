@@ -182,7 +182,6 @@ function App(): React.JSX.Element {
 
   return (
     <View style={{flex: 1, paddingTop: 80, paddingBottom: 35}}>
-      <GestureHandlerRootView style={{flex: 1}}>
         <PullToRefreshFlatList
           THRESHOLD={150}
           onRefresh={() => console.log('refresh')}
@@ -194,7 +193,6 @@ function App(): React.JSX.Element {
           RefreshComponent={SimpleRefreshComponent}
           useOpacity={false}
         />
-      </GestureHandlerRootView>
     </View>
   );
 }
