@@ -9,6 +9,7 @@ import Animated, {
   Easing,
   runOnJS,
 } from "react-native-reanimated";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import PullToRefreshAOS from "./PullToRefreshAOS";
 import PullToRefreshIOS from "./PullToRefreshIOS";
@@ -140,7 +141,7 @@ const PullToRefreshFlatList = forwardRef<
                   letterSpacing: -0.4,
                 }}
               >
-                Sample Refresh Component
+                Pull to the end to refresh
               </Animated.Text>
             )}
           </Animated.View>
@@ -179,10 +180,14 @@ const PullToRefreshFlatList = forwardRef<
     goTop,
   }));
 
-  return Platform.OS === "ios" ? (
-    <PullToRefreshIOS scrollRef={scrollRef} {..._config} />
-  ) : (
-    <PullToRefreshAOS scrollRef={scrollRef} {..._config} />
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      {Platform.OS === "ios" ? (
+        <PullToRefreshIOS scrollRef={scrollRef} {..._config} />
+      ) : (
+        <PullToRefreshAOS scrollRef={scrollRef} {..._config} />
+      )}
+    </GestureHandlerRootView>
   );
 });
 
