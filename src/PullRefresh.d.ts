@@ -1,9 +1,9 @@
-import {FlatListProps} from 'react-native';
+import { FlatListProps } from "react-native";
 
 export interface IPullToRefreshComponentProps
   extends Omit<
     FlatListProps<any>,
-    'data' | 'renderItem' | 'ListHeaderComponent'
+    "data" | "renderItem" | "ListHeaderComponent"
   > {
   /**
    * Function to call when the list is pulled to refresh.
@@ -38,7 +38,7 @@ export interface IPullToRefreshComponentProps
   /**
    * Determines whether the refresh component appears above or below the ListHeaderComponent. Defaults to 'top'.
    */
-  refreshPosition?: 'top' | 'bottom';
+  refreshPosition?: "top" | "bottom";
 
   /**
    * Data for the list. This is an array of any type that represents the data to be rendered in the list.
@@ -55,6 +55,11 @@ export interface IPullToRefreshComponentProps
    * Style object for the content container. This allows for customization of the list's container style.
    */
   contentContainerStyle?: any;
+
+  /**
+   * Whether to apply opacity to the RefreshComponent on pull-to-refresh. Defaults to true.
+   */
+  useOpacity?: boolean;
 }
 
 export interface IPullToRefreshChild extends IPullToRefreshComponentProps {

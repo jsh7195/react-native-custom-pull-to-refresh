@@ -38,6 +38,8 @@
 
 ## example
 
+![Example GIF](https://github.com/jsh7195/react-native-custom-pull-to-refresh/blob/main/sample.gif?raw=true)
+
 ```
 
 /**
@@ -190,6 +192,7 @@ function App(): React.JSX.Element {
           keyExtractor={item => item.id}
           ListHeaderComponent={ListHeaderComponent}
           RefreshComponent={SimpleRefreshComponent}
+          useOpacity={false}
         />
       </GestureHandlerRootView>
     </View>

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {forwardRef, useCallback, useImperativeHandle} from 'react';
-import {Platform} from 'react-native';
+import React, { forwardRef, useCallback, useImperativeHandle } from "react";
+import { Platform } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -8,14 +8,14 @@ import Animated, {
   withTiming,
   Easing,
   runOnJS,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-import PullToRefreshAOS from './PullToRefreshAOS';
-import PullToRefreshIOS from './PullToRefreshIOS';
+import PullToRefreshAOS from "./PullToRefreshAOS";
+import PullToRefreshIOS from "./PullToRefreshIOS";
 import {
   IPullToRefreshComponentProps,
   IPullToRefreshFunction,
-} from './PullRefresh';
+} from "./PullRefresh";
 
 const PullToRefreshFlatList = forwardRef<
   IPullToRefreshFunction,
@@ -25,8 +25,9 @@ const PullToRefreshFlatList = forwardRef<
     ListHeaderComponent,
     RefreshComponent,
     THRESHOLD = 130,
-    refreshPosition = 'top',
+    refreshPosition = "top",
     onRefresh,
+    useOpacity = true,
   } = props;
 
   const scrollY = useSharedValue(0);
@@ -41,13 +42,13 @@ const PullToRefreshFlatList = forwardRef<
         duration: 200,
         easing: Easing.linear,
       },
-      isFinish => {
+      (isFinish) => {
         if (isFinish) {
           if (!enablePullToRefresh.value) {
             enablePullToRefresh.value = true;
           }
         }
-      },
+      }
     );
   };
 
@@ -59,27 +60,27 @@ const PullToRefreshFlatList = forwardRef<
 
   // JS thread 에서 수행하는 원상복귀 애니메이션 (script에서 수행해야할 때)
   const handleRefreshCompleteRefrshApi = () => {
-    'worklet';
+    "worklet";
     runOnJS(refreshApi)();
     runOnJS(setTimeout)(timeoutFunction, 1500);
   };
 
   // refetch 필요없는 complete
   const handleRefreshComplete = () => {
-    'worklet';
+    "worklet";
     scrollY.value = withTiming(
       0,
       {
         duration: 200,
         easing: Easing.linear,
       },
-      isFinish => {
+      (isFinish) => {
         if (isFinish) {
           if (!enablePullToRefresh.value) {
             enablePullToRefresh.value = true;
           }
         }
-      },
+      }
     );
   };
 
@@ -88,7 +89,7 @@ const PullToRefreshFlatList = forwardRef<
   const loadingWrapAnimatedStyle = useAnimatedStyle(() => {
     return {
       height: enablePullToRefresh.value
-        ? interpolate(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], 'clamp')
+        ? interpolate(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], "clamp")
         : 0,
     };
   });
@@ -96,11 +97,13 @@ const PullToRefreshFlatList = forwardRef<
   // wrap
   const wrapAnimatedStyle = useAnimatedStyle(() => {
     return {
-      opacity: enablePullToRefresh.value
-        ? interpolate(scrollY.value, [0, THRESHOLD], [0, 1], 'clamp')
-        : 0,
+      opacity: useOpacity
+        ? enablePullToRefresh.value
+          ? interpolate(scrollY.value, [0, THRESHOLD], [0, 1], "clamp")
+          : 0
+        : 1,
       height: enablePullToRefresh.value
-        ? interpolate(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], 'clamp')
+        ? interpolate(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], "clamp")
         : 0,
     };
   });
@@ -108,16 +111,17 @@ const PullToRefreshFlatList = forwardRef<
   const _ListHeaderComponent = useCallback(() => {
     return (
       <Animated.View>
-        {refreshPosition === 'bottom' && ListHeaderComponent ? (
+        {refreshPosition === "bottom" && ListHeaderComponent ? (
           <ListHeaderComponent />
         ) : null}
         <Animated.View
           style={[
             loadingWrapAnimatedStyle,
             {
-              overflow: 'hidden',
+              overflow: "hidden",
             },
-          ]}>
+          ]}
+        >
           <Animated.View style={wrapAnimatedStyle}>
             {RefreshComponent ? (
               // RefreshComponent 존재 시 직접 렌더링
@@ -127,20 +131,21 @@ const PullToRefreshFlatList = forwardRef<
               <Animated.Text
                 style={{
                   flex: 1,
-                  textAlign: 'center',
-                  color: 'yellow',
-                  backgroundColor: 'green',
+                  textAlign: "center",
+                  color: "yellow",
+                  backgroundColor: "green",
                   paddingBottom: 15,
                   fontSize: 12,
-                  fontWeight: '800',
+                  fontWeight: "800",
                   letterSpacing: -0.4,
-                }}>
+                }}
+              >
                 Sample Refresh Component
               </Animated.Text>
             )}
           </Animated.View>
         </Animated.View>
-        {refreshPosition === 'top' && ListHeaderComponent ? (
+        {refreshPosition === "top" && ListHeaderComponent ? (
           <ListHeaderComponent />
         ) : null}
       </Animated.View>
@@ -165,8 +170,8 @@ const PullToRefreshFlatList = forwardRef<
 
   const goTop = () => {
     setTimeout(
-      () => scrollRef.current?.scrollToOffset({animated: true, offset: 0}),
-      100,
+      () => scrollRef.current?.scrollToOffset({ animated: true, offset: 0 }),
+      100
     );
   };
 
@@ -174,7 +179,7 @@ const PullToRefreshFlatList = forwardRef<
     goTop,
   }));
 
-  return Platform.OS === 'ios' ? (
+  return Platform.OS === "ios" ? (
     <PullToRefreshIOS scrollRef={scrollRef} {..._config} />
   ) : (
     <PullToRefreshAOS scrollRef={scrollRef} {..._config} />
