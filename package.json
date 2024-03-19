@@ -2,7 +2,7 @@
   "name": "react-native-custom-pull-to-refresh",
   "version": "1.0.1",
   "description": "",
-  "types": "./src/PullToRefreshFlatList.d.ts",
+  "types": "./src/PullRefresh.d.ts",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
