@@ -1,11 +1,12 @@
-# android not working...T.T
-  
-  
-  
-
+# dependencies
+```
+"react-native-custom-pull-to-refresh": "github:jsh7195/react-native-custom-pull-to-refresh",
+"react-native-gesture-handler": "^2.15.0",
+"react-native-reanimated": "^3.6.2"
+```
 
 # babel.config.js
-add plugins: ['react-native-reanimated/plugin']
+add `plugins: ['react-native-reanimated/plugin']`
 
 
 
