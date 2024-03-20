@@ -48,24 +48,19 @@ add `plugins: ['react-native-reanimated/plugin']`
 
 - Style object for the content container. This allows for customization of the list's container style.
 
+### `useOpacity?: boolean`
+
+- Opacity 0~1 when RefreshComponent Showing 
+
 ## example
 
 ![Example GIF](https://github.com/jsh7195/react-native-custom-pull-to-refresh/blob/main/sample.gif?raw=true)
 
 ```
 
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
-
-import PullToRefreshFlatList from './src/PullToRefreshFlatList';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import PullToRefreshFlatList from 'react-native-custom-pull-to-refresh';
 
 const iphoneData = [
   {
@@ -195,7 +190,7 @@ function App(): React.JSX.Element {
   return (
     <View style={{flex: 1, paddingTop: 80, paddingBottom: 35}}>
         <PullToRefreshFlatList
-          THRESHOLD={150}
+          THRESHOLD={350}
           onRefresh={() => console.log('refresh')}
           data={iphoneData}
           renderItem={renderItem}
@@ -268,6 +263,8 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
 
 
 ```
