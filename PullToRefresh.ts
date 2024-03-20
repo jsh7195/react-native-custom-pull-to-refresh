@@ -75,3 +75,5 @@ export interface IPullToRefreshChild extends IPullToRefreshComponentProps {
 export interface IPullToRefreshFunction {
   goTop: () => void;
 }
+
+export default IPullToRefreshComponentProps;

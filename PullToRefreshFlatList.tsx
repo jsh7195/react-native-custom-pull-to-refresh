@@ -13,10 +13,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import PullToRefreshAOS from "./PullToRefreshAOS";
 import PullToRefreshIOS from "./PullToRefreshIOS";
-import {
-  IPullToRefreshComponentProps,
-  IPullToRefreshFunction,
-} from "./PullToRefresh";
+import IPullToRefreshComponentProps, { IPullToRefreshFunction } from "./PullToRefresh";
+
 
 const PullToRefreshFlatList = forwardRef<
   IPullToRefreshFunction,
