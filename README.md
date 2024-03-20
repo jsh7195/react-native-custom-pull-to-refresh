@@ -1,3 +1,14 @@
+# android not working...T.T
+  
+  
+  
+
+
+# babel.config.js
+add plugins: ['react-native-reanimated/plugin']
+
+
+
 ## Props
 
 ### `onRefresh?: () => void`
