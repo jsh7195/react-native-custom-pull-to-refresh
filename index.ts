@@ -1,3 +1,2 @@
-import PullToRefreshFlatList from "./src/PullToRefreshFlatList";
-// module.exports = PullToRefreshFlatList;
+import PullToRefreshFlatList from "./PullToRefreshFlatList";
 export default PullToRefreshFlatList;
