@@ -1,2 +1,13 @@
 node_modules
 DS_Store
+
+# npm
+node_modules/
+
+# dev
+src
+.gitignore
+tsconfig.json
+
+# GIT
+.git

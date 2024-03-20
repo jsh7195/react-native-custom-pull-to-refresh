@@ -16,7 +16,7 @@ import PullToRefreshIOS from "./PullToRefreshIOS";
 import {
   IPullToRefreshComponentProps,
   IPullToRefreshFunction,
-} from "./PullRefresh";
+} from "./PullToRefresh";
 
 const PullToRefreshFlatList = forwardRef<
   IPullToRefreshFunction,

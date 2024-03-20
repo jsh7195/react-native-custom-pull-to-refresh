@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import Animated, {useAnimatedGestureHandler} from 'react-native-reanimated';
 import {PanGestureHandler} from 'react-native-gesture-handler';
-import {IPullToRefreshChild} from './PullRefresh';
+import { IPullToRefreshChild } from './PullToRefresh';
 
 const PullToRefreshAOS = (props: IPullToRefreshChild) => {
   const {
