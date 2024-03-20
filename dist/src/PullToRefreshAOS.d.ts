@@ -1,4 +1,3 @@
-import React from 'react';
 import { IPullToRefreshChild } from './PullToRefresh';
-declare const PullToRefreshAOS: (props: IPullToRefreshChild) => React.JSX.Element;
+declare const PullToRefreshAOS: (props: IPullToRefreshChild) => any;
 export default PullToRefreshAOS;
