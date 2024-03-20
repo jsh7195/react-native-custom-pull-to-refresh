@@ -9,6 +9,8 @@
 add `plugins: ['react-native-reanimated/plugin']`
 
 
+### anroid animate slow
+AndroidManifest.xml add android:hardwareAccelerated="true"
 
 ## Props
 
