@@ -33,16 +33,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PullToRefreshFlatList = void 0;
 var react_1 = __importStar(require("react"));
 var react_native_1 = require("react-native");
 var react_native_reanimated_1 = __importStar(require("react-native-reanimated"));
 var react_native_gesture_handler_1 = require("react-native-gesture-handler");
-var PullToRefreshAOS_1 = __importDefault(require("./PullToRefreshAOS"));
-var PullToRefreshIOS_1 = __importDefault(require("./PullToRefreshIOS"));
+var PullToRefreshIOS_1 = require("./PullToRefreshIOS");
+var PullToRefreshAOS_1 = require("./PullToRefreshAOS");
 var PullToRefreshFlatList = (0, react_1.forwardRef)(function (props, ref) {
     var ListHeaderComponent = props.ListHeaderComponent, RefreshComponent = props.RefreshComponent, _a = props.THRESHOLD, THRESHOLD = _a === void 0 ? 130 : _a, _b = props.refreshPosition, refreshPosition = _b === void 0 ? "top" : _b, onRefresh = props.onRefresh, _c = props.useOpacity, useOpacity = _c === void 0 ? true : _c;
     var scrollY = (0, react_native_reanimated_1.useSharedValue)(0);
@@ -136,7 +134,7 @@ var PullToRefreshFlatList = (0, react_1.forwardRef)(function (props, ref) {
     (0, react_1.useImperativeHandle)(ref, function () { return ({
         goTop: goTop,
     }); });
-    return (react_1.default.createElement(react_native_gesture_handler_1.GestureHandlerRootView, { style: { flex: 1 } }, react_native_1.Platform.OS === "ios" ? (react_1.default.createElement(PullToRefreshIOS_1.default, __assign({ scrollRef: scrollRef }, _config))) : (react_1.default.createElement(PullToRefreshAOS_1.default, __assign({ scrollRef: scrollRef }, _config)))));
+    return (react_1.default.createElement(react_native_gesture_handler_1.GestureHandlerRootView, { style: { flex: 1 } }, react_native_1.Platform.OS === "ios" ? (react_1.default.createElement(PullToRefreshIOS_1.PullToRefreshIOS, __assign({ scrollRef: scrollRef }, _config))) : (react_1.default.createElement(PullToRefreshAOS_1.PullToRefreshAOS, __assign({ scrollRef: scrollRef }, _config)))));
 });
-exports.default = PullToRefreshFlatList;
+exports.PullToRefreshFlatList = PullToRefreshFlatList;
 //# sourceMappingURL=PullToRefreshFlatList.js.map

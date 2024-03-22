@@ -23,6 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PullToRefreshIOS = void 0;
 var react_1 = __importStar(require("react"));
 var react_native_1 = require("react-native");
 var react_native_reanimated_1 = __importStar(require("react-native-reanimated"));
@@ -76,5 +77,5 @@ var PullToRefreshIOS = function (props) {
             react_1.default.createElement(react_native_gesture_handler_1.GestureDetector, { gesture: nativeGesture },
                 react_1.default.createElement(react_native_reanimated_1.default.FlatList, { ref: scrollRef, onRefresh: undefined, refreshing: false, scrollEventThrottle: 16, onScroll: scrollHandler, overScrollMode: 'never', bounces: false, showsVerticalScrollIndicator: false, contentContainerStyle: contentContainerStyle, data: data, renderItem: renderItem, keyExtractor: keyExtractor, ListHeaderComponent: react_1.default.createElement(ListHeaderComponent, null) })))));
 };
-exports.default = PullToRefreshIOS;
+exports.PullToRefreshIOS = PullToRefreshIOS;
 //# sourceMappingURL=PullToRefreshIOS.js.map

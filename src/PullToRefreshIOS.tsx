@@ -91,4 +91,4 @@ const PullToRefreshIOS = (props: IPullToRefreshChild) => {
   );
 };
 
-export default PullToRefreshIOS;
+export { PullToRefreshIOS }

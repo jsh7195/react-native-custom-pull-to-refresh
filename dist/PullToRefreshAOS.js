@@ -23,6 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PullToRefreshAOS = void 0;
 var react_1 = __importStar(require("react"));
 var react_native_reanimated_1 = __importStar(require("react-native-reanimated"));
 var react_native_gesture_handler_1 = require("react-native-gesture-handler");
@@ -67,5 +68,5 @@ var PullToRefreshAOS = function (props) {
                     }
                 }, overScrollMode: 'never', bounces: false, showsVerticalScrollIndicator: false, contentContainerStyle: contentContainerStyle, data: data, keyExtractor: keyExtractor, renderItem: renderItem, ListHeaderComponent: react_1.default.createElement(ListHeaderComponent, null) }))));
 };
-exports.default = PullToRefreshAOS;
+exports.PullToRefreshAOS = PullToRefreshAOS;
 //# sourceMappingURL=PullToRefreshAOS.js.map

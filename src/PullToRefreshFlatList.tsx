@@ -11,9 +11,9 @@ import Animated, {
 } from "react-native-reanimated";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import PullToRefreshAOS from "./PullToRefreshAOS";
-import PullToRefreshIOS from "./PullToRefreshIOS";
 import IPullToRefreshComponentProps, { IPullToRefreshFunction } from "./PullToRefresh";
+import { PullToRefreshIOS } from "./PullToRefreshIOS";
+import { PullToRefreshAOS } from "./PullToRefreshAOS";
 
 
 const PullToRefreshFlatList = forwardRef<
@@ -189,4 +189,4 @@ const PullToRefreshFlatList = forwardRef<
   );
 });
 
-export default PullToRefreshFlatList;
+export { PullToRefreshFlatList }

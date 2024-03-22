@@ -1,2 +1,2 @@
 declare const PullToRefreshFlatList: any;
-export default PullToRefreshFlatList;
+export { PullToRefreshFlatList };
