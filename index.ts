@@ -1,2 +1,2 @@
-import PullToRefreshFlatList from "./PullToRefreshFlatList";
+import PullToRefreshFlatList from "./src/PullToRefreshFlatList";
 export default PullToRefreshFlatList;

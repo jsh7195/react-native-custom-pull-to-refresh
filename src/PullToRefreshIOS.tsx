@@ -5,7 +5,7 @@ import Animated, {
   useAnimatedScrollHandler,
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
-import { IPullToRefreshChild } from '.';
+import { IPullToRefreshChild } from '..';
 const PullToRefreshIOS = (props: IPullToRefreshChild) => {
   const {
     scrollRef,
