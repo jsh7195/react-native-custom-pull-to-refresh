@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf ./dist && tsc -p ./tsconfig.json"
@@ -27,5 +28,8 @@
     "react-native": "0.72.4",
     "react-native-gesture-handler": "^2.15.0",
     "react-native-reanimated": "^3.6.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.3"
   }
 }
