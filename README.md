@@ -1,4 +1,8 @@
-```npm i react-native-custom-pull-to-refresh```
+```
+npm i react-native-custom-pull-to-refresh
+npm i react-native-gesture-handler
+npm i react-native-reanimated
+```
 
 # dependencies
 ```
