@@ -1,6 +1,6 @@
 {
   "name": "react-native-custom-pull-to-refresh",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,8 +27,7 @@
     "url": "https://github.com/jsh7195/react-native-custom-pull-to-refresh/issues"
   },
   "homepage": "https://github.com/jsh7195/react-native-custom-pull-to-refresh#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react-native-gesture-handler": "^2.15.0",
     "react-native-reanimated": "^3.6.2"
