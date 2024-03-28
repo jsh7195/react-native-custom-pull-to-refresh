@@ -1,33 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { forwardRef, useCallback, useImperativeHandle } from "react";
 import { Platform } from "react-native";
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  interpolate,
-  withTiming,
-  Easing,
-  runOnJS,
-} from "react-native-reanimated";
+import Animated, { useSharedValue, useAnimatedStyle, interpolate, withTiming, Easing, runOnJS } from "react-native-reanimated";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import IPullToRefreshComponentProps, { IPullToRefreshFunction } from "./PullToRefresh";
 import { PullToRefreshIOS } from "./PullToRefreshIOS";
 import { PullToRefreshAOS } from "./PullToRefreshAOS";
 
-
-const PullToRefreshFlatList = forwardRef<
-  IPullToRefreshFunction,
-  IPullToRefreshComponentProps
->((props, ref) => {
-  const {
-    ListHeaderComponent,
-    RefreshComponent,
-    THRESHOLD = 130,
-    refreshPosition = "top",
-    onRefresh,
-    useOpacity = true,
-  } = props;
+const PullToRefreshFlatList = forwardRef<IPullToRefreshFunction, IPullToRefreshComponentProps>((props, ref) => {
+  const { ListHeaderComponent, RefreshComponent, THRESHOLD = 130, refreshPosition = "top", onRefresh, useOpacity = true } = props;
 
   const scrollY = useSharedValue(0);
   const enablePullToRefresh = useSharedValue(true);
@@ -87,32 +69,22 @@ const PullToRefreshFlatList = forwardRef<
   //wrap 펼칠 때
   const loadingWrapAnimatedStyle = useAnimatedStyle(() => {
     return {
-      height: enablePullToRefresh.value
-        ? interpolate(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], "clamp")
-        : 0,
+      height: enablePullToRefresh.value ? interpolate(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], "clamp") : 0,
     };
   });
 
   // wrap
   const wrapAnimatedStyle = useAnimatedStyle(() => {
     return {
-      opacity: useOpacity
-        ? enablePullToRefresh.value
-          ? interpolate(scrollY.value, [0, THRESHOLD], [0, 1], "clamp")
-          : 0
-        : 1,
-      height: enablePullToRefresh.value
-        ? interpolate(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], "clamp")
-        : 0,
+      opacity: useOpacity ? (enablePullToRefresh.value ? interpolate(scrollY.value, [0, THRESHOLD], [0, 1], "clamp") : 0) : 1,
+      height: enablePullToRefresh.value ? interpolate(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], "clamp") : 0,
     };
   });
 
   const _ListHeaderComponent = useCallback(() => {
     return (
       <Animated.View>
-        {refreshPosition === "bottom" && ListHeaderComponent ? (
-          <ListHeaderComponent />
-        ) : null}
+        {refreshPosition === "bottom" && ListHeaderComponent ? <ListHeaderComponent /> : null}
         <Animated.View
           style={[
             loadingWrapAnimatedStyle,
@@ -144,18 +116,10 @@ const PullToRefreshFlatList = forwardRef<
             )}
           </Animated.View>
         </Animated.View>
-        {refreshPosition === "top" && ListHeaderComponent ? (
-          <ListHeaderComponent />
-        ) : null}
+        {refreshPosition === "top" && ListHeaderComponent ? <ListHeaderComponent /> : null}
       </Animated.View>
     );
-  }, [
-    RefreshComponent,
-    refreshPosition,
-    ListHeaderComponent,
-    loadingWrapAnimatedStyle,
-    wrapAnimatedStyle,
-  ]);
+  }, [RefreshComponent, refreshPosition, ListHeaderComponent, loadingWrapAnimatedStyle, wrapAnimatedStyle]);
 
   const _config = {
     ...props,
@@ -167,34 +131,17 @@ const PullToRefreshFlatList = forwardRef<
     ListHeaderComponent: _ListHeaderComponent,
   };
 
-  const goTop = () => {
-    setTimeout(
-      () => scrollRef.current?.scrollToOffset({ animated: true, offset: 0 }),
-      100
-    );
-  };
-
-  useImperativeHandle(
-    ref,
-    () => {
-        return {
-            goTop() {
-                setTimeout(() => scrollRef.current?.scrollToOffset({ animated: true, offset: 0 }), 100);
-            },
-        };
+  useImperativeHandle(ref, () => ({
+    goTop: () => {
+      setTimeout(() => scrollRef.current?.scrollToOffset({ animated: true, offset: 0 }), 100);
     },
-    [],
-); 
+  }));
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      {Platform.OS === "ios" ? (
-        <PullToRefreshIOS scrollRef={scrollRef} {..._config} />
-      ) : (
-        <PullToRefreshAOS scrollRef={scrollRef} {..._config} />
-      )}
+      {Platform.OS === "ios" ? <PullToRefreshIOS scrollRef={scrollRef} {..._config} /> : <PullToRefreshAOS scrollRef={scrollRef} {..._config} />}
     </GestureHandlerRootView>
   );
 });
 
-export { PullToRefreshFlatList }
+export { PullToRefreshFlatList };
