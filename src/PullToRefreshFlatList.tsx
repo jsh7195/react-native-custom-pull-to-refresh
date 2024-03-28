@@ -178,7 +178,7 @@ const PullToRefreshFlatList = forwardRef<
     ref,
     () => {
         return {
-            goTop: () => {
+            goTop() {
                 setTimeout(() => scrollRef.current?.scrollToOffset({ animated: true, offset: 0 }), 100);
             },
         };
