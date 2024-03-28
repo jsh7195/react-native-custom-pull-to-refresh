@@ -20,6 +20,7 @@ npm i react-native-custom-pull-to-refresh
 
 | Name                   | Description                                                                                     | Value             |
 |------------------------|-------------------------------------------------------------------------------------------------|-------------------|
+| `ref` |  ref?.current?.goTop() can be used to scroll to the top of the list. | `React.ref` |
 | `onRefresh`            | Function to call when the list is pulled to refresh. This function is triggered when the user pulls down the list. | `() => void`      |
 | `onScroll`             | Function to handle scroll event. It can be used to perform actions during the scroll.           | `(event: NativeSyntheticEvent<NativeScrollEvent>) => void` |
 | `THRESHOLD`            | The threshold height for triggering the refresh. Defaults to 150. This is the height the user must pull down to trigger the onRefresh function. | `number` (Default: 150) |
