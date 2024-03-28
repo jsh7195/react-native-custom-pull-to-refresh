@@ -174,9 +174,17 @@ const PullToRefreshFlatList = forwardRef<
     );
   };
 
-  useImperativeHandle(ref, () => ({
-    goTop,
-  }));
+  useImperativeHandle(
+    ref,
+    () => {
+        return {
+            goTop: () => {
+                setTimeout(() => scrollRef.current?.scrollToOffset({ animated: true, offset: 0 }), 100);
+            },
+        };
+    },
+    [],
+); 
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
