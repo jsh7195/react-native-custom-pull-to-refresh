@@ -32,6 +32,7 @@ var PullToRefreshIOS = function (props) {
     var scrollRef = props.scrollRef, ListHeaderComponent = props.ListHeaderComponent, onScroll = props.onScroll, handleRefreshCompleteRefrshApi = props.handleRefreshCompleteRefrshApi, handleRefreshComplete = props.handleRefreshComplete, scrollY = props.scrollY, THRESHOLD = props.THRESHOLD, enablePullToRefresh = props.enablePullToRefresh, contentContainerStyle = props.contentContainerStyle, data = props.data, renderItem = props.renderItem, keyExtractor = props.keyExtractor;
     var panRef = (0, react_1.useRef)();
     var nativeRef = (0, react_1.useRef)();
+    var isScrolling = (0, react_native_reanimated_1.useSharedValue)(false);
     var panGesture = react_native_gesture_handler_1.Gesture.Pan()
         .manualActivation(false)
         .minPointers(1)
@@ -71,6 +72,14 @@ var PullToRefreshIOS = function (props) {
                 (0, react_native_reanimated_1.runOnJS)(onScroll)(event);
             }
         },
+    });
+    (0, react_native_reanimated_1.useAnimatedReaction)(function () { return ({
+        value1: scrollY.value,
+        value2: isScrolling.value,
+    }); }, function (values) {
+        if (values.value1 === 0 && !values.value2) {
+            enablePullToRefresh.value = true;
+        }
     });
     return (react_1.default.createElement(react_native_gesture_handler_1.GestureDetector, { gesture: panGesture },
         react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },

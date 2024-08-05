@@ -83,26 +83,18 @@ var PullToRefreshFlatList = (0, react_1.forwardRef)(function (props, ref) {
     };
     var loadingWrapAnimatedStyle = (0, react_native_reanimated_1.useAnimatedStyle)(function () {
         return {
-            height: enablePullToRefresh.value
-                ? (0, react_native_reanimated_1.interpolate)(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], "clamp")
-                : 0,
+            height: enablePullToRefresh.value ? (0, react_native_reanimated_1.interpolate)(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], "clamp") : 0,
         };
     });
     var wrapAnimatedStyle = (0, react_native_reanimated_1.useAnimatedStyle)(function () {
         return {
-            opacity: useOpacity
-                ? enablePullToRefresh.value
-                    ? (0, react_native_reanimated_1.interpolate)(scrollY.value, [0, THRESHOLD], [0, 1], "clamp")
-                    : 0
-                : 1,
-            height: enablePullToRefresh.value
-                ? (0, react_native_reanimated_1.interpolate)(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], "clamp")
-                : 0,
+            opacity: useOpacity ? (enablePullToRefresh.value ? (0, react_native_reanimated_1.interpolate)(scrollY.value, [0, THRESHOLD], [0, 1], "clamp") : 0) : 1,
+            height: enablePullToRefresh.value ? (0, react_native_reanimated_1.interpolate)(scrollY.value, [0, THRESHOLD], [0, THRESHOLD], "clamp") : 0,
         };
     });
     var _ListHeaderComponent = (0, react_1.useCallback)(function () {
         return (react_1.default.createElement(react_native_reanimated_1.default.View, null,
-            refreshPosition === "bottom" && ListHeaderComponent ? (react_1.default.createElement(ListHeaderComponent, null)) : null,
+            refreshPosition === "bottom" && ListHeaderComponent ? react_1.default.createElement(ListHeaderComponent, null) : null,
             react_1.default.createElement(react_native_reanimated_1.default.View, { style: [
                     loadingWrapAnimatedStyle,
                     {
@@ -119,22 +111,15 @@ var PullToRefreshFlatList = (0, react_1.forwardRef)(function (props, ref) {
                         fontWeight: "800",
                         letterSpacing: -0.4,
                     } }, "Pull to the end to refresh")))),
-            refreshPosition === "top" && ListHeaderComponent ? (react_1.default.createElement(ListHeaderComponent, null)) : null));
-    }, [
-        RefreshComponent,
-        refreshPosition,
-        ListHeaderComponent,
-        loadingWrapAnimatedStyle,
-        wrapAnimatedStyle,
-    ]);
+            refreshPosition === "top" && ListHeaderComponent ? react_1.default.createElement(ListHeaderComponent, null) : null));
+    }, [RefreshComponent, refreshPosition, ListHeaderComponent, loadingWrapAnimatedStyle, wrapAnimatedStyle]);
     var _config = __assign(__assign({}, props), { scrollY: scrollY, THRESHOLD: THRESHOLD, handleRefreshCompleteRefrshApi: handleRefreshCompleteRefrshApi, handleRefreshComplete: handleRefreshComplete, enablePullToRefresh: enablePullToRefresh, ListHeaderComponent: _ListHeaderComponent });
-    var goTop = function () {
-        setTimeout(function () { var _a; return (_a = scrollRef.current) === null || _a === void 0 ? void 0 : _a.scrollToOffset({ animated: true, offset: 0 }); }, 100);
-    };
     (0, react_1.useImperativeHandle)(ref, function () { return ({
-        goTop: goTop,
+        goTop: function () {
+            setTimeout(function () { var _a; return (_a = scrollRef.current) === null || _a === void 0 ? void 0 : _a.scrollToOffset({ animated: true, offset: 0 }); }, 100);
+        },
     }); });
-    return (react_1.default.createElement(react_native_gesture_handler_1.GestureHandlerRootView, { style: { flex: 1 } }, react_native_1.Platform.OS === "ios" ? (react_1.default.createElement(PullToRefreshIOS_1.PullToRefreshIOS, __assign({ scrollRef: scrollRef }, _config))) : (react_1.default.createElement(PullToRefreshAOS_1.PullToRefreshAOS, __assign({ scrollRef: scrollRef }, _config)))));
+    return (react_1.default.createElement(react_native_gesture_handler_1.GestureHandlerRootView, { style: { flex: 1 } }, react_native_1.Platform.OS === "ios" ? react_1.default.createElement(PullToRefreshIOS_1.PullToRefreshIOS, __assign({ scrollRef: scrollRef }, _config)) : react_1.default.createElement(PullToRefreshAOS_1.PullToRefreshAOS, __assign({ scrollRef: scrollRef }, _config))));
 });
 exports.PullToRefreshFlatList = PullToRefreshFlatList;
 //# sourceMappingURL=PullToRefreshFlatList.js.map
