@@ -29,44 +29,51 @@ const PullToRefreshIOS = (props: IPullToRefreshChild) => {
   const isScrolling = useSharedValue<boolean>(false);
 
   const panGesture = Gesture.Pan()
-    .manualActivation(false)
-    .minPointers(1)
-    .onTouchesDown((event, stateManager) => {})
-    .onUpdate(event => {
-      scrollY.value = event.translationY;
-    })
-    .onEnd(() => {
+  .manualActivation(false)
+  .minPointers(1)
+  .onTouchesDown((event, stateManager) => {})
+  .onUpdate(event => {
       if (enablePullToRefresh.value) {
-        if (scrollY.value > THRESHOLD + 5) {
-          handleRefreshCompleteRefrshApi();
-        } else {
-          handleRefreshComplete();
-        }
+          scrollY.value = event.translationY;
       }
-    })
-    .activeOffsetY([THRESHOLD * -1, 5])
-    .failOffsetX([-50000, 50000])
-    .failOffsetY([0, 50000])
-    .simultaneousWithExternalGesture(nativeRef)
-    .withRef(panRef);
+  })
+  .onEnd(event => {
+      if (enablePullToRefresh.value) {
+          if (scrollY.value > THRESHOLD + 5) {
+              handleRefreshCompleteRefrshApi();
+          } else {
+              handleRefreshComplete();
+          }
+      }
+  })
+  .activeOffsetY([THRESHOLD * -1, 5])
+  .failOffsetX([-50000, 50000])
+  .failOffsetY([0, 50000])
+  .simultaneousWithExternalGesture(nativeRef)
+  .withRef(panRef);
 
   const nativeGesture = Gesture.Native()
     .simultaneousWithExternalGesture(panRef)
     .withRef(nativeRef);
 
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: event => {
-      if (event.contentOffset.y <= 0) {
-        enablePullToRefresh.value = true;
-        scrollY.value = 0;
-      } else {
-        enablePullToRefresh.value = false;
-        scrollY.value = event.contentOffset.y;
-      }
-      if (onScroll) {
-        runOnJS(onScroll)(event);
-      }
-    },
+    const scrollHandler = useAnimatedScrollHandler({
+      onScroll: (event, ctx) => {
+          if (event.contentOffset.y <= 0) {
+              scrollY.value = 0;
+          } else {
+              enablePullToRefresh.value = false;
+              scrollY.value = event.contentOffset.y;
+          }
+          if (onScroll) {
+              runOnJS(onScroll)(event);
+          }
+      },
+      onBeginDrag: () => {
+          isScrolling.value = true;
+      },
+      onEndDrag: () => {
+          isScrolling.value = false;
+      },
   });
 
   useAnimatedReaction(

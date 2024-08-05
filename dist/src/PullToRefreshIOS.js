@@ -38,9 +38,11 @@ var PullToRefreshIOS = function (props) {
         .minPointers(1)
         .onTouchesDown(function (event, stateManager) { })
         .onUpdate(function (event) {
-        scrollY.value = event.translationY;
+        if (enablePullToRefresh.value) {
+            scrollY.value = event.translationY;
+        }
     })
-        .onEnd(function () {
+        .onEnd(function (event) {
         if (enablePullToRefresh.value) {
             if (scrollY.value > THRESHOLD + 5) {
                 handleRefreshCompleteRefrshApi();
@@ -59,9 +61,8 @@ var PullToRefreshIOS = function (props) {
         .simultaneousWithExternalGesture(panRef)
         .withRef(nativeRef);
     var scrollHandler = (0, react_native_reanimated_1.useAnimatedScrollHandler)({
-        onScroll: function (event) {
+        onScroll: function (event, ctx) {
             if (event.contentOffset.y <= 0) {
-                enablePullToRefresh.value = true;
                 scrollY.value = 0;
             }
             else {
@@ -71,6 +72,12 @@ var PullToRefreshIOS = function (props) {
             if (onScroll) {
                 (0, react_native_reanimated_1.runOnJS)(onScroll)(event);
             }
+        },
+        onBeginDrag: function () {
+            isScrolling.value = true;
+        },
+        onEndDrag: function () {
+            isScrolling.value = false;
         },
     });
     (0, react_native_reanimated_1.useAnimatedReaction)(function () { return ({
