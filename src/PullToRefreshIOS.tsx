@@ -3,6 +3,8 @@ import {View} from 'react-native';
 import Animated, {
   runOnJS,
   useAnimatedScrollHandler,
+  useAnimatedReaction,
+  useSharedValue
 } from 'react-native-reanimated';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import { IPullToRefreshChild } from './PullToRefresh';
@@ -24,6 +26,7 @@ const PullToRefreshIOS = (props: IPullToRefreshChild) => {
 
   const panRef = useRef();
   const nativeRef = useRef();
+  const isScrolling = useSharedValue<boolean>(false);
 
   const panGesture = Gesture.Pan()
     .manualActivation(false)
@@ -65,6 +68,18 @@ const PullToRefreshIOS = (props: IPullToRefreshChild) => {
       }
     },
   });
+
+  useAnimatedReaction(
+    () => ({
+        value1: scrollY.value,
+        value2: isScrolling.value,
+    }),
+    values => {
+        if (values.value1 === 0 && !values.value2) {
+            enablePullToRefresh.value = true;
+        }
+    },
+);
 
   return (
     <GestureDetector gesture={panGesture}>
